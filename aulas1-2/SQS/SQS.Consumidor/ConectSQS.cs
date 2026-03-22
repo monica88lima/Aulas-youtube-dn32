@@ -18,6 +18,11 @@ namespace SQS.Consumidor
             };
 
             var response = await client.ReceiveMessageAsync(request);
+            if(response.Messages.Count == 0)
+            {
+                Console.WriteLine("Nenhuma mensagem recebida.");
+                return;
+            }
             foreach (var item in response.Messages)
             {
                 Console.WriteLine(item.Body);
